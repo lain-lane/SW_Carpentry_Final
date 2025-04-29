@@ -12,10 +12,14 @@ class Player:
         critchance=.50 + .01*self.xp
         roll=random.uniform(0,1)
         if roll>=critchance:
-            damage=round(random.gauss(1.4*self.weapon.dmg,1.6*self.weapon.dmg))
+            damage=round(random.gauss(1.5*self.weapon.dmg,0.1*self.weapon.dmg))
+            while (1.4*self.weapon.dmg <= damage <= 1.6*self.weapon.dmg)==False: # rerolls the randomizer if it's not within the range
+                damage=round(random.gauss(1.5*self.weapon.dmg,0.1*self.weapon.dmg))
             crit=True
         else:
-            damage = round(random.gauss(.8*self.weapon.dmg,1.2*self.weapon.dmg))
+            damage = round(random.gauss(self.weapon.dmg,0.2*self.weapon.dmg))
+            while (0.8*self.weapon.dmg <= damage <= 1.2*self.weapon.dmg)==False: # rerolls the randomizer if it's not within the range
+                damage=round(random.gauss(self.weapon.dmg,0.2*self.weapon.dmg))
             crit=False
         enemy.hp += - damage
         return(damage,crit)
@@ -29,7 +33,7 @@ class Enemy:
         self.dmg = dmg
 
     def attack(self, player): 
-        damage = round(random.gauss(.8*self.dmg,1.2*self.dmg))
+        damage = round(random.gauss(self.dmg,0.2*self.dmg))
         player.hp += - damage
         return(damage)
     
@@ -47,6 +51,8 @@ def Fight(player, enemy):
         whiteflag=False
         quitter=False
         turn_counter=1 # player goes first (positive), enemy's turn will be negative
+
+        actions_dict={'0',player.attack}
         
         while player.hp>0 and enemy.hp>0 and whiteflag==False and quitter==False:
             if turn_counter<0: # enemy turn
@@ -84,7 +90,8 @@ def Fight(player, enemy):
             print('you died')
 
 def Game():
-    # make a loop that runs until user types quit
+    print('Welcome to the game!\n')
+    # make this have a while loop that keeps the game going until user types quit
     pass
 
 
