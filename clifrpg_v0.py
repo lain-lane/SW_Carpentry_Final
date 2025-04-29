@@ -52,7 +52,7 @@ def Fight(player, enemy):
         quitter=False
         turn_counter=1 # player goes first (positive), enemy's turn will be negative
 
-        actions_dict={'0',player.attack}
+        actions_dict={'0':player.attack(enemy)}
         
         while player.hp>0 and enemy.hp>0 and whiteflag==False and quitter==False:
             if turn_counter<0: # enemy turn
@@ -69,10 +69,12 @@ def Fight(player, enemy):
             else:
                 # player turn
                 print('Your HP: '+ str(player.hp))
-                action=str(input('0 - attack, 1 - retreat\n'))
-                # change this so that it calls on a dictionary of possible inputs
+                action=actions_input()
+                # now this calls on the function which ensures they enter a valid input
+                # we can code all of the spells here in the fight section and have conditionals in the 
+                # action input so that they can only see the spells they've learned
                 if action=='0':
-                    damage,crit=player.attack(enemy)
+                    damage,crit=actions_dict[action]
                     if crit==False:
                         print('you dealt ' + str(damage)+ ' dmg')
                     else:
@@ -94,7 +96,27 @@ def Game():
     # make this have a while loop that keeps the game going until user types quit
     pass
 
+def actions_input():
+    actions_dict={'0':['attack','damage opponent'],'1':['retreat','leave the fight']} # dictionary for actions represented with numbers
+    actions_list=['quit'] # all possible actions
+    for key in actions_dict:
+        actions_list.append(key)
 
+    prompt='' # to hold the prompt users will see when they input
+    for i in actions_list: 
+        if i in actions_dict: # go through actions and add their descriptions
+            prompt += i + ' - ' + actions_dict[i][0] + ', '
+    prompt=prompt[:-2] # remove last comma and space
+    
+    action='' # to hold the input
+    while action not in actions_list: # loop makes it so we keep prompting til we get a valid input
+        action=str(input(prompt+'\n'))
+        help_word='inspect' # user needs to type this then a space then the number of the action they need help with
+        if len(action)>len(help_word):
+            if [action[j]==help_word[j] for j in range(len(help_word))]:
+                if action[len(help_word)+1] in actions_dict:
+                    print(actions_dict[action[len(help_word)+1]][1]) # print corresponding descriptions
+    return(action)
 
 
 
@@ -104,6 +126,8 @@ if __name__=='__main__':
     Joe=Player(100,0,sword)
     Evil_Joe=Enemy(100,5)
     Fight(Joe,Evil_Joe)
+
+
 
 
 
