@@ -72,11 +72,11 @@ class Player:
 
         def cast(self,target):
             roll=roll_die(self.dmg)
-            if target.weakness==self.aspect:
+            if target.weakness==self.aspect and target.weakness!=None:
                 # does more damage if the enemy is weak to that
                 roll = 2*roll
                 print("Super effective! You dealt "+ str(roll) + " dmg")
-            elif target.aspect==self.aspect:
+            elif target.aspect==self.aspect and target.aspect!=None:
                 # does less damage to attack enemy with its own aspect
                 roll = round(roll/ 2)
                 print("Not very effective! You dealt "+ str(roll) + " dmg")
@@ -95,6 +95,7 @@ class Player:
                 feed to get_actions to get spells for that level'''
         # to make the game more realistic you could implement a nonlinear scaling
         lvl=math.floor(self.xp/100)
+        self.max_hp=100 + 50*lvl # increases max health as you level up
         return(lvl)
     
     def get_actions(self):

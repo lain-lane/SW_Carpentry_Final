@@ -47,6 +47,8 @@ Goblin=Enemy(50,5,10,None,None,"Goblin")
 
 Dragon=Enemy(1000,50,1000,None,'arcane',"Dragon")
 
+Snow_Sprite=Enemy(20,5,5,'ice','fire','Snow Sprite')
+
 Snow_Golem=Enemy(100,20,50,'ice','fire',"Snow Golem")
 
 Magma_Cube=Enemy(10,2,4,'fire','ice','Magma Cube')

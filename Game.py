@@ -1,6 +1,4 @@
-import random
-from Dice import roll_die
-from Enemies import Snow_Golem, Dragon
+
 import time
 from Player import Player
 
@@ -15,7 +13,9 @@ def Fight(player, enemy):
     quitter=False # this flag closes the loop if the player quits
     turn_counter=1 # player goes first (positive), enemy's turn will be negative
 
+    print('-'*100)
     print(enemy.name+' HP: '+ str(enemy.hp))
+
     # continues until someone quits or dies
     while player.hp>0 and enemy.hp>0 and quitter==False:
         # ENEMY TURN
@@ -47,6 +47,7 @@ def Fight(player, enemy):
     if enemy.hp<=0:
         enemy.die(player) # this function adds the xp to the player
         print('Enemy died and dropped '+str(enemy.drop)+ ' xp')
+        print('Your XP: ' +str(player.xp))
     elif player.hp<=0:
         print('You died! Game over.')
 

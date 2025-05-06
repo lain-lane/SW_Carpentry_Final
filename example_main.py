@@ -1,7 +1,5 @@
-import random
-from Dice import roll_die
-from Enemies import Snow_Golem, Dragon
-import time
+
+from Enemies import Snow_Golem, Dragon, Goblin, Snow_Sprite, Magma_Cube
 from Player import Player
 from Game import Tutorial, Load, Save, Fight
 
@@ -12,10 +10,10 @@ starts the game which can then be saved using the Save function. Calling Tutoria
 
 if __name__=='__main__':
 
-    # Joe=Load('save1.rpg')
-    Joe=Player(hp=100,max_hp=100,xp=100)
-    Evil_Joe=Snow_Golem
-    Fight(Joe,Evil_Joe)
-    Save(Joe)
+    Protag=Load('save1.rpg')
+    # Protag=Player(hp=100,max_hp=100,xp=100)
+    Bad_Guy=Magma_Cube
+    Fight(Protag,Bad_Guy)
+    Save(Protag)
 
     # Tutorial()
