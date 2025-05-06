@@ -1,6 +1,8 @@
 # SW_Carpentry_Final
 Final Project for Software Carpentry Spring 2025
 
+example_main.py contains a short example of how the main game is played
+
 ### IMPORTS:
 
 from Player import Player
