@@ -4,7 +4,7 @@ from Enemies import Snow_Golem, Dragon
 import time
 from Player import Player
 
-'''This script contains the basic functions to run the game'''
+'''This script contains the basic functions to run the game-'''
     
 def Fight(player, enemy):
     '''starts a fight that runs until someone dies or player quits
@@ -15,8 +15,7 @@ def Fight(player, enemy):
     quitter=False # this flag closes the loop if the player quits
     turn_counter=1 # player goes first (positive), enemy's turn will be negative
 
-    actions_dict=player.actions_dict 
-    
+    print(enemy.name+' HP: '+ str(enemy.hp))
     # continues until someone quits or dies
     while player.hp>0 and enemy.hp>0 and quitter==False:
         # ENEMY TURN
@@ -30,7 +29,8 @@ def Fight(player, enemy):
         # PLAYER TURN
         else:
             print('Your HP: '+ str(player.hp))
-            action=player.actions_input() # calls on a function that validates input
+            actions_dict=player.get_actions() # calls on a function that gets spells according to level
+            action=player.actions_input(actions_dict) # calls on a function that validates user input
 
             if action in actions_dict:
                 spell=actions_dict[action] # grab corresponding spell from the dictionary 

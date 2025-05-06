@@ -12,8 +12,8 @@ starts the game which can then be saved using the Save function. Calling Tutoria
 
 if __name__=='__main__':
 
-    Joe=Load('save1.rpg')
-    # Joe=Player(hp=100,max_hp=100,xp=0)
+    # Joe=Load('save1.rpg')
+    Joe=Player(hp=100,max_hp=100,xp=100)
     Evil_Joe=Snow_Golem
     Fight(Joe,Evil_Joe)
     Save(Joe)
