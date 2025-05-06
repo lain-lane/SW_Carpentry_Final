@@ -4,6 +4,7 @@ from Enemies import Snow_Golem, Dragon
 import time
 from Player import Player
 
+'''This script contains the basic functions to run the game'''
     
 def Fight(player, enemy):
     '''starts a fight that runs until someone dies or player quits
@@ -58,7 +59,7 @@ def Tutorial():
     
     print('-'*100+'\n')
     print('Welcome to the Command Line Interface Fantasy Role Playing Game (CLIF RPG)\n')
-    print('You are a young wizard. Fight enemies to gain XP and learn new spells.\n')
+    print('You are a young wizard. Fight enemies to gain XP and improve your magic.\n')
     print('During a fight, type the number that corresponds to the spell you want to cast.')
     print('To read what a spell does, type "inspect X" where X is the number of the spell.\n')
     print('To end a fight early, type "quit".\n')

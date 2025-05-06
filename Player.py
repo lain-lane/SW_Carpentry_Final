@@ -1,6 +1,8 @@
 from Dice import roll_die
+import numpy as np
 
 class Player:
+    '''this class holds all of the player's stats and actions'''
     def __init__(self, hp, max_hp, xp):
         self.hp = hp # health points
         self.max_hp = max_hp # max health
@@ -8,20 +10,16 @@ class Player:
 
     ### Implement level up system
     
-    class Spell(): # parent class for the other Spells to inherit from
+    class Healing_Spell():
         def __init__(self, dmg, aspect, name, descr):
             self.dmg = dmg # damage
             self.aspect = aspect 
             self.name = name
             self.descr=descr # description
-    
-    class Healing_Spell(Spell):
-        def __init__(self, dmg, aspect, name, descr):
-            super.__init__(dmg, aspect, name, descr)
         
         def cast(self,target):
             roll=roll_die(self.dmg)
-            new_hp=target.hp+roll
+            new_hp=target.hp + roll 
             # makes it so you can't heal past the hp cap
             if new_hp>target.max_hp:
                 target.hp=target.max_hp
@@ -30,10 +28,13 @@ class Player:
             print("You healed "+str(roll)+" hp")
 
 
-    class Fire_Spell(Spell):
+    class Damage_Spell():
         def __init__(self, dmg, aspect, name, descr):
-            super.__init__(dmg, aspect, name, descr)
-        
+            self.dmg = dmg # damage
+            self.aspect = aspect 
+            self.name = name
+            self.descr=descr # description
+            
         def cast(self,target):
             roll=roll_die(self.dmg)
             if target.weakness==self.aspect:
@@ -43,11 +44,23 @@ class Player:
             else:
                 print("You dealt "+ str(roll) + " dmg")
             target.hp += - roll
+    
             
-    # here we can implement the xp thing
-    Heal=Healing_Spell(8,'heal','Heal','heals small amount of hp')
-    Fire=Fire_Spell(8,'fire','Fireball','does small amount of fire damage')
+    # here we can implement XP scaling: SOMEHOW
 
+    # max_heal=np.round(10+xp/100)
+    # max_dmg=np.round(10+self.xp/100)
+
+    max_heal=10
+    max_dmg=10
+
+    Heal=Healing_Spell(max_heal,'heal','Heal','heals up to ' +str(max_heal)+ ' hp')
+    Fire=Damage_Spell(max_dmg,'fire','Fireball','deals up to ' +str(max_dmg)+ ' fire damage')
+    Ice=Damage_Spell(max_dmg,'ice','Ice Blast','deals up to ' +str(max_dmg)+ ' ice damage')
+
+    # figured out the problem, this can't be defined as a class variable I need it to go with the instance
+    # so that it can change depending on the xp
+    # it's midnight am i actually gonna do that right now 
     actions_dict={'0':Heal,'1':Fire} # dictionary for actions represented with numbers
     actions_list=['quit'] # use this to hold all possible actions
     for key in actions_dict:
