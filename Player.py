@@ -11,7 +11,7 @@ class Player:
         xp: int
             experience points'''
 
-    def __init__(self, hp, max_hp, xp):
+    def __init__(self, hp=100, max_hp=100, xp=0):
         # these stats go in the save file
         self.hp = hp # health points
         self.max_hp = max_hp # max health
